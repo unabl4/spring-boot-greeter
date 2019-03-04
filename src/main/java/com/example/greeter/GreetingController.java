@@ -30,4 +30,12 @@ public class GreetingController {
         map.put("k2", "v2");
         return map;
     }
+
+    @GetMapping("/greetingPojo")
+    @ResponseBody
+    public Person greetingPojo(@RequestParam(name="name") String name) {
+        Person person = new Person();   // person to greet
+        person.setName(name);
+        return person;
+    }
 }
