@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class GreetingController {
@@ -12,6 +13,12 @@ public class GreetingController {
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
+        return "greeting";
+    }
+
+    @GetMapping("/greetingMap")
+    public String greetingMap(@RequestParam(name="name", required=false, defaultValue="World") String name, Map<String, Object> model) {
+        model.put("name", name);
         return "greeting";
     }
 
