@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @Controller
 public class GreetingController {
 
@@ -18,5 +20,14 @@ public class GreetingController {
     public String greetingAdvanced(@PathVariable String name) {
 //        return Collections.singletonMap("response", name);
         return "greeting_advanced";
+    }
+
+    @GetMapping("/greetingHash")
+    @ResponseBody
+    public HashMap<String, Object> greetingHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("k1", "v1");
+        map.put("k2", "v2");
+        return map;
     }
 }
