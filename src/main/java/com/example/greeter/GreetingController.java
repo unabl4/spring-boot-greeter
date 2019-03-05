@@ -24,9 +24,9 @@ public class GreetingController {
 
     @RequestMapping(value = "/greeting/{name}", method = RequestMethod.GET, produces = "text/plain")
 //    @ResponseBody
-    public String greetingAdvanced(@PathVariable String name) {
+    public String greetingName(@PathVariable String name) {
 //        return Collections.singletonMap("response", name);
-        return "greeting_advanced";
+        return "greeting_name";
     }
 
     @GetMapping("/greetingHash")
@@ -40,7 +40,17 @@ public class GreetingController {
 
     @GetMapping("/greetingPojo")
     @ResponseBody
-    public Person greetingPojo(@RequestParam(name="name") String name) {
+    public Person greetingPojo(@RequestParam(name="name", required=false) String name) {
+        name = (name == null || name.isEmpty()) ? "stranger" : name;    // fallback to 'stranger'
+
+        Person person = new Person();   // person to greet
+        person.setName(name);
+        return person;
+    }
+
+    @GetMapping("/greetingPojo/{name}")
+    @ResponseBody
+    public Person greetingPojoName(@PathVariable(name="name") String name) {
         Person person = new Person();   // person to greet
         person.setName(name);
         return person;
